@@ -5,7 +5,14 @@ class Navi extends App_Brick_Fixed_Abstract
 	
 	public function __construct($naviArr)
 	{
-		$this->_naviArr = $naviArr;
+		if(array_key_exists('left', $naviArr)) {
+			$this->_naviArr = $naviArr;
+		} else {
+			$this->_naviArr = array(
+				'left' => $naviArr,
+				'right' => array()
+			);
+		}
 	}
 	
 	public function prepare()

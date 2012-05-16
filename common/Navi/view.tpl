@@ -2,13 +2,14 @@
 <div class='toolbar'>
 	<div class='main'>
 		<ul class='left'>
-			{% for node in naviArr %}
+			{% for node in naviArr['left'] %}
 				{{ item.list(node) }}
 			{% endfor %}
 		</ul> 
 		<ul class='right'>
-			<li><a href='/admin/account'>我的账户</a></li>
-			<li><a href='/admin/index/logout'>退出后台</a></li>
+			{% for node in naviArr['right'] %}
+				{{ item.list(node) }}
+			{% endfor %}
 		</ul>
 	</div>
 	<div class='sub'></div>
