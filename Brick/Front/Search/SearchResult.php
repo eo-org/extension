@@ -32,8 +32,10 @@ class SearchResult extends AbstractBrick
     			$type = 'product';
     			$co = $factory->_m('Product');
     			$co->setFields(array('label', 'introtext', 'introicon', 'attributeDetail', 'created'))
-    				->addFilter('label', new MongoRegex("/".$keywords."/i"))
-    				->setPage($page)
+    				->addFilter('$or', array(
+    					array('label' => new MongoRegex("/".$keywords."/i")),
+    					array('name' =>	new MongoRegex("/^".$keywords."/i")),
+    				))->setPage($page)
     				->setPageSize($pageSize);
     		} else {
     			$co = $factory->_m('Article');
