@@ -64,12 +64,12 @@ class Filter
 	
 	static function outputImage($url, $type = 'main')
 	{
+		$siteConfig = self::$serviceManager->get('Fucms\SiteConfig');
 		$urlArr = parse_url($url);
 		if(isset($urlArr['host'])) {
 			return $url;
 		} else {
-			$siteFolder = \Class_Server::getSiteFolder();
-			return \Class_Server::getImageUrl().'/'.$siteFolder.'/'.$url;
+			return $siteConfig->fileFolderUrl.'/'.$url;
 		}
 	}
 	
