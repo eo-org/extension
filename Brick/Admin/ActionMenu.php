@@ -49,7 +49,7 @@ class ActionMenu extends AbstractBrick
 						$label = '保存';
 						$method = 'post';
 						if(empty($callback)) {
-							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array('action' => 'edit'), null,  true);
+							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array(), null,  true);
 						}
 						break;
 					case 'delete':
