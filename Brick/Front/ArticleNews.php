@@ -20,6 +20,7 @@ class ArticleNews extends AbstractBrick
 		}
 		$co = $factory->_m('Article');
 		$co->setFields(array('groupId', 'label', 'introtext', 'introicon', 'created', 'modified', 'featured'))
+			->addFilter('status', 'publish')
 			->setPagesize($this->getParam('limit'))
 			->setPage(1)
 			->sort('_id', -1);

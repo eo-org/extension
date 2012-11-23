@@ -48,8 +48,9 @@ class ProductList extends AbstractBrick
 			$factory = $this->dbFactory();
 			
 			$co = $factory->_m('Product');
-			$co->addFilter('groupId', $groupId)
-				->setFields(array('id', 'name', 'sku', 'label', 'introicon', 'introtext', 'price', 'attributeDetail'))
+			$co->setFields(array('id', 'name', 'sku', 'label', 'introicon', 'introtext', 'price', 'attributeDetail'))
+				->addFilter('groupId', $groupId)
+				->addFilter('status', 'publish')
 				->setPage($page)
 				->setPageSize($pageSize);
 			switch($this->getParam('defaultSort')) {

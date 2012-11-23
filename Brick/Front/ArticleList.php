@@ -50,6 +50,7 @@ class ArticleList extends AbstractBrick
 			$co = $factory->_m('Article');
 			$co->setFields(array('id', 'label', 'introtext', 'introicon', 'created'))
 				->addFilter('groupId', $groupId)
+				->addFilter('status', 'publish')
 				->setPage($page)
 				->setPageSize($pageSize)
 				->sort('weight');

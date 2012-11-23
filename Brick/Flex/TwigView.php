@@ -1,6 +1,8 @@
 <?php
 namespace Brick\Flex;
 
+use Fucms\Session\Admin;
+
 class TwigView
 {
     protected $_assigned = array();
@@ -249,8 +251,8 @@ class TwigView
     public function render($name)
     {
         $template = $this->_twig->loadTemplate($name);
-        
-        if(\Fucms\Session\Admin::checkLoginStatue()) {
+        $sessionAdmin = new Admin();
+        if($sessionAdmin->isLogin()) {
         	$tHead = '<div class="'.$this->_renderClass().'" brick-id="'.$this->_brickId.'" ext-name="'.$this->_extName.'" gearlinks=\'['.$this->_renderGearLinks().']\'>';
 //        	$tHead.= ;
         } else {

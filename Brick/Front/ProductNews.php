@@ -20,6 +20,7 @@ class ProductNews extends AbstractBrick
     	}
 		$co = $factory->_m('Product');
 		$co->setFields(array('id', 'name', 'sku', 'label', 'introicon', 'introtext', 'price'))
+			->addFilter('status', 'publish')
 			->setPagesize($this->getParam('limit'))
 			->setPage(1)
 			->sort('_id', -1);
