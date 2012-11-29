@@ -1,6 +1,7 @@
 <?php
 namespace Brick\Flex;
 
+use Exception;
 use Brick\Flex\TwigView;
 
 abstract class AbstractBrick
@@ -119,7 +120,11 @@ abstract class AbstractBrick
     
     public function twigPath()
     {
-        return '/'.$this->_brick->extName;
+    	$sm = $this->_controller->getServiceLocator();
+    	$siteConfig = $sm->get('Fucms\SiteConfig');
+    	$globalSiteId = $siteConfig->globalSiteId;
+    	$twigPath = BASE_PATH.'/tpl/'.$globalSiteId.'/'.$this->_brick->extName;
+        return $twigPath;
     }
     
     public function render($type = null)
@@ -127,11 +132,14 @@ abstract class AbstractBrick
     	if($this->_disableRender === true) {
 	        return "<div class='no-render'></div>";
     	} else if(is_string($this->_disableRender)) {
-    		return "<div class='".$this->_disableRender."' brickId='".$this->_brick->brickId."'>无法找到对应的URL，此模块内容为空</div>";
+    		return "<div class='".$this->_disableRender."' brickId='".$this->_brick->getId()."'>无法找到对应的URL，此模块内容为空</div>";
     	} else {
 	    	$this->view = new TwigView();
 			$this->view->setScriptPath(BASE_PATH.'/extension/view'.$this->path());
 			$this->view->assign($this->_params);
+    		if(is_dir($this->twigPath())) {
+				$this->view->addScriptPath($this->twigPath());
+			}
 			$this->prepare();
 			
 			$this->view->setBrickId($this->_brick->getId())
@@ -139,13 +147,13 @@ abstract class AbstractBrick
 				->setClassSuffix($this->_brick->cssSuffix);
 			
 			$this->view->brickName = $this->_brick->brickName;
-			$this->view->brickId = $this->_brick->brickId;
+			$this->view->brickId = $this->_brick->getId();
 			$this->view->displayBrickName = $this->_brick->displayBrickName;
 			
 			try {
 				return $this->view->render($this->_brick->tplName);
 			} catch(Exception $e) {
-				return "critical error within brick id: ".$this->_brick->brickId.'!!<br /><a href="#/admin/brick/edit/brick-id/'.$this->_brick->brickId.'">reset parameters</a>';
+				return "critical error within brick id: ".$this->_brick->getId().'!!<br /><a href="#/admin/brick.ajax/edit/brick-id/'.$this->_brick->getId().'">reset parameters</a>';
 			}
     	}
     }
@@ -191,8 +199,8 @@ abstract class AbstractBrick
     			$sysTplArray[$file] = $file;
     		}
     	}
-    	/*
-    	$userFolder = TEMPLATE_PATH.$this->twigPath();
+    	
+    	$userFolder = $this->twigPath();
     	if(is_dir($userFolder)) {
 			$handle = opendir($userFolder);
 	    	while($file = readdir($handle)) {
@@ -200,8 +208,10 @@ abstract class AbstractBrick
 	    			$userTplArray[$file] = $file;
 	    		}
 	    	}
+		} else {
+			$userTplArray = array();
 		}
-		*/
+		
 		$tplArray = array(
 			array('label' => 'system', 'options' => $sysTplArray,),
 			array('label' => 'user', 'options' => $userTplArray)

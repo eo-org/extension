@@ -10,7 +10,7 @@ class ProductNews extends Fieldset
 	{
 		parent::__construct('params');
 		
-		$groupDoc = $factory->_m('Group')->addFilter('type', 'article')
+		$groupDoc = $factory->_m('Group')->addFilter('type', 'product')
     		->fetchOne();
     	$items = $groupDoc->toMultioptions('label');
 		$items['all'] = '[全部产品]';
