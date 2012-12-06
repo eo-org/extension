@@ -11,7 +11,7 @@ class Html extends Fieldset
     	
     	$this->add(array(
     		'name' => 'content',
-    		'attributes' => array('type' => 'textarea', 'id' => 'ck_text_editor'),
+    		'attributes' => array('type' => 'textarea', 'id' => 'codemirror-editor'),
     		'options' => array('label' => 'HTML：')
         ));
         $this->add(array(
@@ -19,7 +19,7 @@ class Html extends Fieldset
         	'type' => 'Zend\Form\Element\Button',
         	'attributes' => array(
         		'class' => 'icon-selector',
-        		'data-callback' => 'appendToEditor',
+        		'data-callback' => 'appendToCmEditor',
         	),
         	'options' => array('label' => '插入图片')
         ));

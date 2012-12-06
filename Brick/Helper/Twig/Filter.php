@@ -65,11 +65,10 @@ class Filter
 	static function outputImage($url, $type = 'main')
 	{
 		$siteConfig = self::$serviceManager->get('Fucms\SiteConfig');
-		$urlArr = parse_url($url);
-		if(isset($urlArr['host'])) {
-			return $url;
-		} else {
+		if($type == 'main') {
 			return $siteConfig->fileFolderUrl.'/'.$url;
+		} else {
+			return $siteConfig->fileFolderUrl.'/_resize/'.$url;
 		}
 	}
 	
