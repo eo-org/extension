@@ -39,6 +39,16 @@ class FancyTransition extends Fieldset
     		)
     	));
     	$this->add(array(
+    		'name' => 'width',
+    		'attributes' => array('type' => 'text'),
+    		'options' => array('label' => '广告宽度')
+    	));
+    	$this->add(array(
+    		'name' => 'height',
+    		'attributes' => array('type' => 'text'),
+    		'options' => array('label' => '广告高度')
+    	));
+    	$this->add(array(
     		'name' => 'delay',
     		'type' => 'Zend\Form\Element\Select',
     		'options' => array(
