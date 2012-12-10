@@ -48,7 +48,7 @@ class ProductList extends AbstractBrick
 			$factory = $this->dbFactory();
 			
 			$co = $factory->_m('Product');
-			$co->setFields(array('id', 'name', 'sku', 'label', 'introicon', 'introtext', 'price', 'attributeDetail'))
+			$co->setFields(array('id', 'name', 'sku', 'label', 'introicon', 'introtext', 'price', 'attributeDetail', 'attachment'))
 				->addFilter('groupId', $groupId)
 				->addFilter('status', 'publish')
 				->setPage($page)
