@@ -77,4 +77,25 @@ class Filter
 		$translator = self::$serviceManager->get('translator');
 		return $translator->translate($text);
 	}
+	
+	static function graphicDataJson($attachments)
+	{
+		if(is_array($attachments)) {
+			$dataArr = array();
+			foreach($attachments as $attr) {
+				if($attr['filetype'] == 'graphic') {
+					$dataArr[] = '"'.$attr['urlname'].'"';
+				}
+			}
+			if(count($dataArr) == 0) {
+				return "";
+			}
+			$dataStr = '"items": [';
+			$dataStr .= implode(',', $dataArr);
+			$dataStr .= ']';
+			return $dataStr;
+		} else {
+			return "";
+		}
+	}
 }

@@ -22,7 +22,7 @@ class TwigView
     {
         $this->_twig = new \Twig_Environment(null, $envOptions);
         $this->_twig->addFilter('outputImage',		new \Twig_Filter_Function('Brick\Helper\Twig\Filter::outputImage'));
-        $this->_twig->addFilter('graphicDataJson',	new \Twig_Filter_Function('Class_HTML::graphicDataJson'));
+        $this->_twig->addFilter('graphicDataJson',	new \Twig_Filter_Function('Brick\Helper\Twig\Filter::graphicDataJson'));
         $this->_twig->addFilter('substr',			new \Twig_Filter_Function('Brick\Helper\Twig\Filter::substr'));
         $this->_twig->addFilter('url',				new \Twig_Filter_Function('Brick\Helper\Twig\Filter::url'));
         $this->_twig->addFilter('pageLink',			new \Twig_Filter_Function('Brick\Helper\Twig\Filter::pageLink'));
