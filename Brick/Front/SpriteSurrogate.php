@@ -12,7 +12,7 @@ class SpriteSurrogate extends AbstractBrick
     public function prepare()
     {
     	$br = $this->_controller->getBrickRegister();
-    	$surrogateId = 'surrogate-'.$this->_brick->brickId;
+    	$surrogateId = 'surrogate-'.$this->_brick->getId();
     	$tabs = $br->getBrickList($surrogateId);
     	
     	$this->view->tabs = $tabs;
