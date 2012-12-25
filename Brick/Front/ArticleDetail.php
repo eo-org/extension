@@ -9,21 +9,22 @@ class ArticleDetail extends AbstractBrick
     {
     	$sm = $this->_controller->getServiceLocator();
     	$layoutFront = $sm->get('Fucms\Layout\Front');
-		$layoutType = $layoutFront->getLayoutType();
-		$resource = $layoutFront->getResource();
+		$context = $layoutFront->getContext();
+    	$rm = $layoutFront->getRouteMatch();
+    	$articleId = $rm->getParam('id');
     	
-    	$article = $resource;
-    	
-        if($layoutType == 'article' && $article != 'not-found') {
-	        $title = $article->label;
+    	$factory = $this->dbFactory();
+    	$articleDoc = $factory->_m('Article')->find($articleId);
+        if($context->getType() == 'article' && $articleDoc != null) {
+	        $title = $articleDoc->label;
 	        if($this->getParam('showHits') == 'y') {
-	        	$article->hits++;
-	        	$article->save();
+	        	$articleDoc->hits++;
+	        	$articleDoc->save();
 	        }
         } else {
         	$title = '文章找不到';
         }
-        $this->view->row = $article;
+        $this->view->row = $articleDoc;
     }
     
     public function getClass()

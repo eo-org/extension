@@ -37,12 +37,11 @@ class Filter
 		$routeName = 'application/'.$routeType;
 		
 		if(isset($docArr['alias']) && !empty($docArr['alias'])) {
-			$resourceAlias = $docArr['alias'];
-			return $router->assemble(array('resourceAlias' => $resourceAlias), array('name' => 'application/user-defined'));
+			$resourceId = $docArr['alias'];
 		} else {
 			$resourceId = $docArr['id'];
-			return $router->assemble(array('id' => $resourceId, 'page' => 1), array('name' => $routeName));
 		}
+		return $router->assemble(array('id' => $resourceId, 'page' => 1), array('name' => $routeName));
 	}
 	
 	public static function pageLink($pageNumber, $routeType, $routeMatchParams, $getQueryParams = array())

@@ -9,22 +9,10 @@ class ProductGroupIndex extends AbstractBrick
 	{
 		$sm = $this->_controller->getServiceLocator();
 		$layoutFront = $sm->get('Fucms\Layout\Front');
-		$layoutType = $layoutFront->getLayoutType();
-		$resource = $layoutFront->getResource();
+		$context = $layoutFront->getContext();
 		
-		$groupItemId = null;
-		if($resource == 'not-found') {
-			$groupItemId = 0;
-		} else {
-			if($layoutType == 'product') {
-				$groupItemId = $resource->groupId;
-			} else if($layoutType == 'product-list') {
-				$groupItemId = $resource->getId();
-			}
-		}
-		
-		$factory = $this->dbFactory();
-		$groupDoc = $factory->_m('Group')->findProductGroup();
+		$groupItemId = $context->getId();
+		$groupDoc = $context->getGroupDoc();
 		if($this->getParam('level') == 'auto') {
 			$branchIndex = $groupDoc->getLevelOneTree($groupItemId);
 			$branchIndexArr = array($branchIndex);

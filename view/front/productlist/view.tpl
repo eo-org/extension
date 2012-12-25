@@ -22,5 +22,5 @@
 </ul>
 
 <div class="pagination-control">
-{{paginator.toPage(pages, routeType, routeMatchParams)}}
+{{paginator.toPage(pages, 'application/product-list', routeMatchParams)}}
 </div>

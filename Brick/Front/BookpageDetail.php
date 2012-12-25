@@ -10,19 +10,25 @@ class BookpageDetail extends AbstractBrick
     {
     	$sm = $this->_controller->getServiceLocator();
 		$layoutFront = $sm->get('Fucms\Layout\Front');
-		$resource = $layoutFront->getResource();
+		$context = $layoutFront->getContext();
 		
-		$matches = $this->_controller->getEvent()->getRouteMatch();
-		$routeMatchParams = $matches->getParams();
+		if($context->getType() != 'book') {
+			throw new Exception('this extension is only suitable for a book typed layout!');
+		}
 		
-    	$pageName = $routeMatchParams['query'];
+		$rm = $layoutFront->getRouteMatch();
+    	$pageId = $rm->getParam('pageId');
+    	
+    	if(is_null($pageId)) {
+    		$pageId = 'index';
+    	}
+    	
     	$factory = $this->dbFactory();
     	$co = $factory->_m('Book_Page');
-    	
     	$pageDoc = $co->addFilter('$or', array(
-    		array('_id' => new MongoId($pageName)),
-    		array('alias' => $pageName)
-    	))->fetchOne();
+	    		array('_id' => new MongoId($pageId)),
+	    		array('alias' => $pageId)
+	    	))->addFilter('bookId', $context->getId())->fetchOne();
     	$this->view->doc = $pageDoc;
     }
     

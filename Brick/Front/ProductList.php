@@ -12,12 +12,8 @@ class ProductList extends AbstractBrick
 		$sm = $this->_controller->getServiceLocator();
 		$layoutFront = $sm->get('Fucms\Layout\Front');
 		
-		$matches = $this->_controller->getEvent()->getRouteMatch();
-		$routeMatchParams = $matches->getParams();
-		$routeType = $matches->getMatchedRouteName();
-		
-		$layoutType = $layoutFront->getLayoutType();
-		if($layoutType != 'product-list') {
+		$context = $layoutFront->getContext();
+		if($context->getType() != 'product-list') {
 			$this->_disableRender = 'no-resource';
 			return false;
 		}
@@ -26,27 +22,17 @@ class ProductList extends AbstractBrick
 		if(empty($pageSize)) {
 			$pageSize = 20;
 		}
-		if($routeType == 'application/user-defined') {
-			$query = $this->_controller->params()->fromRoute('query');
-			$queryArr = explode('-', $query);
-			if(count($queryArr) > 1) {
-				$page = $queryArr[1];
-			} else {
-				$page = 1;
-			}
-		} else {
-			$page = $this->_controller->params()->fromRoute('page');
-		}
+		$rm = $layoutFront->getRouteMatch();
+		$page = $rm->getParam('page');
 		
-		$groupItemId = null;
-		$groupDoc = $layoutFront->getResource();
-		if($groupDoc == 'not-found' || $groupDoc == null) {
+		$groupItemDoc = $context->getGroupItemDoc();
+		if($groupItemDoc == 'not-found' || $groupItemDoc == null) {
 			$this->_disableRender = 'no-resource';
 			return;
 		} else {
-			$groupId = $groupDoc->getId();
+			$groupId = $groupItemDoc->getId();
 			$factory = $this->dbFactory();
-			
+				
 			$co = $factory->_m('Product');
 			$co->setFields(array('id', 'name', 'sku', 'label', 'introicon', 'introtext', 'price', 'attributeDetail', 'attachment'))
 				->addFilter('groupId', $groupId)
@@ -65,19 +51,18 @@ class ProductList extends AbstractBrick
 			}
 			$dataSize = $co->count();
 			$data = $co->fetchDoc();
-			
+			 
 			$paginator = new Paginator(new NullAdapter($dataSize));
-	        Paginator::setDefaultScrollingStyle('Sliding');
-	        $paginator->setCurrentPageNumber($page)
-	        	->setItemCountPerPage($pageSize);
-	        $pages = $paginator->getPages();
-			
-			$this->view->title = $groupDoc->label;
+			Paginator::setDefaultScrollingStyle('Sliding');
+			$paginator->setCurrentPageNumber($page)
+				->setItemCountPerPage($pageSize);
+			$pages = $paginator->getPages();
+			 
+			$this->view->title = $groupItemDoc->label;
 			$this->view->rowset = $data;
-			
-			$this->view->routeType = $routeType;
+				
 			$this->view->pages = $pages;
-			$this->view->routeMatchParams = $routeMatchParams;
+			$this->view->routeMatchParams = $context->getRouteParams();
 		}
 	}
 	

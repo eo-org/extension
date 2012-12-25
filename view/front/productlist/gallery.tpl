@@ -14,4 +14,6 @@
 {% endfor %}
 </ul>
 
-{{ paginator|raw }}
+<div class="pagination-control">
+{{paginator.toPage(pages, 'application/product-list', routeMatchParams)}}
+</div>

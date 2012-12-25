@@ -1,8 +1,8 @@
 {% macro loop(node, bookAlias) %}
 {% spaceless %}
     <li>
-    {% if node.link %}
-    	<a href='/{{bookAlias}}/{{ node.link }}.shtml'>{{ node.label }}</a>
+    {% if node.alias %}
+    	<a href='/{{bookAlias}}/{{ node.alias }}.shtml'>{{ node.label }}</a>
     {% else %}
     	<a href='/{{bookAlias}}/{{ node.id }}.shtml'>{{ node.label }}</a>
     {% endif %}

@@ -13,14 +13,17 @@ class Flow extends AbstractBrick
     {
 		$sm = $this->_controller->getServiceLocator();
 		$layoutFront = $sm->get('Fucms\Layout\Front');
-		$layoutType = $layoutFront->getLayoutType();
-		$resource = $layoutFront->getResource();
-    	
-    	if($layoutType != 'book') {
+		
+		$context = $layoutFront->getContext();
+    	if($context->getType() != 'book') {
     		throw new Exception('this extension is only suitable for a book typed layout!');
     	}
     	
-    	$bookDoc = $resource;
+    	$bookDoc = $context->getContextDoc();
+    	if(is_null($bookDoc)) {
+    		$this->_disableRender = 'no-resource';
+			return;
+    	}
     	$this->view->bookAlias = $bookDoc->alias;
     	$this->view->bookIndex = $bookDoc->bookIndex;
     }

@@ -9,13 +9,22 @@ class ProductDetail extends AbstractBrick
     {
     	$sm = $this->_controller->getServiceLocator();
     	$layoutFront = $sm->get('Fucms\Layout\Front');
-		$resource = $layoutFront->getResource();
-		
-    	$product = $resource;
-		if($product == 'not-found') {
-			$this->_disableRender = 'brick-product-detail';
-		}
-        $this->view->row = $product;
+    	$context = $layoutFront->getContext();
+    	$rm = $layoutFront->getRouteMatch();
+    	$productId = $rm->getParam('id');
+    	 
+    	$factory = $this->dbFactory();
+    	$productDoc = $factory->_m('Product')->find($productId);
+    	if($context->getType() == 'product' && $productDoc != null) {
+    		$title = $productDoc->label;
+    		if($this->getParam('showHits') == 'y') {
+    			$productDoc->hits++;
+    			$productDoc->save();
+    		}
+    	} else {
+    		$this->_disableRender = 'brick-product-detail';
+    	}
+    	$this->view->row = $productDoc;
     }
     
     public function getClass()
