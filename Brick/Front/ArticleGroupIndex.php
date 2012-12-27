@@ -11,7 +11,7 @@ class ArticleGroupIndex extends AbstractBrick
 		$layoutFront = $sm->get('Fucms\Layout\Front');
 		$context = $layoutFront->getContext();
 		
-		$groupItemId = $context->getId();
+		$groupItemId = $context->getGroupItemId();
 		$groupDoc = $context->getGroupDoc();
 		if($this->getParam('level') == 'auto') {
 			$branchIndex = $groupDoc->getLevelOneTree($groupItemId);

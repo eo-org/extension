@@ -3,7 +3,7 @@ namespace Brick\Front;
 
 use Brick\Flex\AbstractBrick;
 
-class ProductGroupIndex extends AbstractBrick
+class ArticleChildGroupIndex extends AbstractBrick
 {
 	public function prepare()
 	{
@@ -13,12 +13,9 @@ class ProductGroupIndex extends AbstractBrick
 		
 		$groupItemId = $context->getGroupItemId();
 		$groupDoc = $context->getGroupDoc();
-		if($this->getParam('level') == 'auto') {
-			$branchIndex = $groupDoc->getLevelOneTree($groupItemId);
-			$branchIndexArr = array($branchIndex);
-		} else {
-			$branchIndexArr = $groupDoc->groupIndex;
-		}
+		
+		$branchIndex = $groupDoc->getLeaf($groupItemId);
+		$branchIndexArr = array($branchIndex);
 		
 		$this->view->branchIndexArr = $branchIndexArr;
 		$this->view->currentGroupItemId = $groupItemId;
@@ -26,6 +23,6 @@ class ProductGroupIndex extends AbstractBrick
 	
 	public function getClass()
 	{
-		return __CLASS__;
+		return null;
 	}
 }
