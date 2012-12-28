@@ -48,10 +48,7 @@ class Filter
 	{
 		$router = self::$serviceManager->get('Router');
 		
-		if($routeType == 'application/user-defined') {
-			$params = array_merge($routeMatchParams, array('query' => 'page-'.$pageNumber));
-			return $router->assemble($params, array('name' => $routeType));
-		} else if($routeType == 'application/search') {
+		if($routeType == 'application/search') {
 			$getQueryParams['page'] = "page=".$pageNumber;
 			$getQueryStr = implode('&', $getQueryParams);
 			return "/search.shtml?".$getQueryStr;
