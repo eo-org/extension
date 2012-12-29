@@ -10,7 +10,7 @@
 	{% for msn in msnArr %}
 		<li>
 			<a target="_blank" href="http://settings.messenger.live.com/Conversation/IMMe.aspx?invitee={{ msn }}&mkt=en-US">
-				<img style="border-style: none;" src="http://messenger.services.live.com/users/{{ msn }}/presenceimage?mkt=en-US" width="16" height="16" />
+				<img style="border: none;" src="http://messenger.services.live.com/users/{{ msn }}/presenceimage?mkt=en-US" width="16" height="16" />
 			</a>
 		</li>
 	{% endfor %}
@@ -30,7 +30,7 @@
 	floatDiv.appendTo('body');
 	floatDiv.css({'position':'absolute', 'top':'175px'});
 	var rightPos = $('body').width() - floatDiv.width() - 20;
-	rightPos+= 'px';
+	rightPos+= "px";
 	floatDiv.css({'left':rightPos});
 	
 	$(window).scroll(function() {
