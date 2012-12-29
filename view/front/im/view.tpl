@@ -25,6 +25,7 @@
 </div>
 
 <script type='text/javascript'>
+$('document').ready(function() {
 	var floatDiv = $('.float-im-bg');
 	
 	floatDiv.appendTo('body');
@@ -45,4 +46,5 @@
 		rightPos+= 'px';
 		floatDiv.css({'left':rightPos});
 	});
+});
 </script>
