@@ -7,7 +7,9 @@ class Logo extends AbstractBrick
 {
 	public function prepare()
     {
-    	$siteDoc = $this->_controller->getSiteDoc();
+    	$dbFactory = $this->_controller->dbFactory();
+    	
+    	$siteDoc = $dbFactory->_m('Info')->fetchOne();
     	$logo = 'none';
     	if(!empty($siteDoc->logo)) {
     		$logo = $siteDoc->logo;
