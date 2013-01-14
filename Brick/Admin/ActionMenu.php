@@ -27,21 +27,21 @@ class ActionMenu extends AbstractBrick
 						$label = '创建新项目';
 						$method = 'link';
 						if(empty($callback)) {
-							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array('action' => 'create'), null,  true);
+							$callback = $urlHelper->fromRoute('admin/actionroutes/wildcard', array('action' => 'create'), null,  true);
 						}
 						break;
 					case 'create-edit':
 						$label = '创建新项目';
 						$method = 'link';
 						if(empty($callback)) {
-							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array('action' => 'edit'), null,  true);
+							$callback = $urlHelper->fromRoute('admin/actionroutes/wildcard', array('action' => 'edit'), null,  true);
 						}
 						break;
 					case 'create-save':
 						$label = '创建新项目';
 						$method = 'post';
 						if(empty($callback)) {
-							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array('action' => 'create'), null,  true);
+							$callback = $urlHelper->fromRoute('admin/actionroutes/wildcard', array('action' => 'create'), null,  true);
 						}
 						break;
 					case 'save':
@@ -49,7 +49,7 @@ class ActionMenu extends AbstractBrick
 						$label = '保存';
 						$method = 'post';
 						if(empty($callback)) {
-							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array(), null,  true);
+							$callback = $urlHelper->fromRoute('admin/actionroutes/wildcard', array(), null,  true);
 						}
 						break;
 					case 'delete':
@@ -57,7 +57,7 @@ class ActionMenu extends AbstractBrick
 						$label = '删除';
 						$method = 'link';
 						if(empty($callback)) {
-							$callback = $urlHelper->fromRoute('admin/childroutes/wildcard', array('action' => 'delete'), null,  true);
+							$callback = $urlHelper->fromRoute('admin/actionroutes/wildcard', array('action' => 'delete'), null,  true);
 						}
 						break;
 					case 'func':
