@@ -11,7 +11,9 @@ class SpriteSurrogate extends AbstractBrick
 	
     public function prepare()
     {
-    	$br = $this->_controller->getBrickRegister();
+    	$sm = $this->_controller->getServiceLocator();
+    	$layoutFront = $sm->get('Fucms\Layout\Front');
+    	$br = $layoutFront->getBrickRegister();
     	$surrogateId = 'surrogate-'.$this->_brick->getId();
     	$tabs = $br->getBrickList($surrogateId);
     	
