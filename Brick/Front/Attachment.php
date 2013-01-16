@@ -7,8 +7,8 @@ class Attachment extends Class_Brick_Solid_Abstract
 {
 	public function prepare()
     {
-    	$clf = Class_Layout_Front::getInstance();
-    	$res = $clf->getResource();
+    	$layoutFront = $this->_controller->getServiceLocator();
+    	$res = $clf->getResourceDoc();
     	if(is_null($res)) {
     		$attachment = null;
     	} else {

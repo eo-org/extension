@@ -24,8 +24,9 @@ class ArticleNews extends AbstractBrick
 			->setPagesize($this->getParam('limit'))
 			->setPage(1)
 			->sort('_id', -1);
-		$co->addFilter('groupId', $groupId);
-		
+		if($groupId != 'all') {
+			$co->addFilter('groupId', $groupId);
+		}
     	$rowset = $co->fetchDoc();
     	
     	$this->view->groupId = $groupId;
