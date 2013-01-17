@@ -153,7 +153,7 @@ abstract class AbstractBrick
 			try {
 				return $this->view->render($this->_brick->tplName);
 			} catch(Exception $e) {
-				return "critical error within brick id: ".$this->_brick->getId().'!!<br /><a href="#/admin/brick.ajax/edit/brick-id/'.$this->_brick->getId().'">reset parameters</a>';
+				return $e->getMessage()."critical error within brick id: ".$this->_brick->getId().'!!<br /><a href="#/admin/brick.ajax/edit/brick-id/'.$this->_brick->getId().'">reset parameters</a>';
 			}
     	}
     }
