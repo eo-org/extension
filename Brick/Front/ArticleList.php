@@ -39,7 +39,7 @@ class ArticleList extends AbstractBrick
 				->addFilter('status', 'publish')
 				->setPage($page)
 				->setPageSize($pageSize)
-				->sort('weight');
+				->sort('_id' -1);
 	        $dataSize = $co->count();
 	        $data = $co->fetchDoc();
 	        

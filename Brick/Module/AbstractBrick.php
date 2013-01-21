@@ -123,7 +123,7 @@ abstract class AbstractBrick
     public function twigPath()
     {
     	$sm = $this->_controller->getServiceLocator();
-    	$siteConfig = $sm->get('Fucms\SiteConfig');
+    	$siteConfig = $sm->get('ConfigObject\EnvironmentConfig');
     	$globalSiteId = $siteConfig->globalSiteId;
     	$twigPath = BASE_PATH.'/tpl/'.$globalSiteId.'/'.$this->_brick->extName;
         return $twigPath;

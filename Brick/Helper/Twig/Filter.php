@@ -60,7 +60,7 @@ class Filter
 	
 	static function outputImage($url, $type = 'main')
 	{
-		$siteConfig = self::$serviceManager->get('Fucms\SiteConfig');
+		$siteConfig = self::$serviceManager->get('ConfigObject\EnvironmentConfig');
 		if($type == 'main') {
 			return $siteConfig->fileFolderUrl.'/'.$url;
 		} else {
