@@ -7,7 +7,7 @@ class ActionTitle extends AbstractBrick
 {
     public function prepare()
     {
-    	$title = $this->controller->getServiceLocator()->get(__NAMESPACE__ . '\ActionTitle\Config');
+    	$title = $this->getConfig();
     	
 		$this->title = $title;
 	}
@@ -19,6 +19,9 @@ class ActionTitle extends AbstractBrick
 	
 	public function getConfig()
 	{
-		return $this->controller->getServiceLocator()->get(__NAMESPACE__ . '\ActionTitle\Config');
+		if($this->controller->getServiceLocator()->has('Brick\Admin\ActionTitle\Config')) {
+			return $this->controller->getServiceLocator()->get(__NAMESPACE__ . '\ActionTitle\Config');
+		}
+		return $this->controller->actionTitle;
 	}
 }

@@ -96,6 +96,9 @@ class ActionMenu extends AbstractBrick
 	
 	public function getConfig()
 	{
-		return $this->controller->getServiceLocator()->get(__NAMESPACE__ . '\ActionMenu\Config');
+		if($this->controller->getServiceLocator()->has('Brick\Admin\ActionMenu\Config')) {
+			return $this->controller->getServiceLocator()->get(__NAMESPACE__ . '\ActionMenu\Config');
+		}
+		return $this->controller->actionMenu;
 	}
 }
