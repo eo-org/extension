@@ -16,16 +16,12 @@ abstract class AbstractBrick
     
     protected $view = null;
     
-    public function __construct($brick, $controller)
+    public function initParam($brick, $controller)
     {
     	$this->_brick = $brick;
     	$this->_controller = $controller;
-        $this->_params = (object)$brick->params;
-        
-        $this->_init();
+    	$this->_params = (object)$brick->params;
     }
-    
-    public function _init(){}
     
     abstract public function getClass();
     
