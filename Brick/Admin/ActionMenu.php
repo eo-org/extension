@@ -20,6 +20,7 @@ class ActionMenu extends AbstractBrick
 				$label = $setting['label'];
 				$callback = $setting['callback'];
 				$method = isset($setting['method']) ? $setting['method'] : 'link';
+				$aId = isset($setting['id']) ? $setting['id'] : '';
 			} else {
 				$type = $setting;
 				switch($type) {
@@ -83,7 +84,11 @@ class ActionMenu extends AbstractBrick
 			if($method == 'link') {
 				$buttonArr[] = "<a class='action-menu' href='".$callback."'>".$label."</a>";
 			} else {
-				$buttonArr[] = "<a class='action-menu' href='".$callback."' method='".$method."'>".$label."</a>";
+				if(!empty($method)) {
+					$buttonArr[] = "<a id='".$aId."' class='action-menu' href='".$callback."' method='".$method."'>".$label."</a>";
+				} else {
+					$buttonArr[] = "<a id='".$aId."' class='action-menu' href='".$callback."'>".$label."</a>";
+				}
 			}
 		}
 		$this->buttons = $buttonArr;
