@@ -16,6 +16,7 @@ class ActionMenu extends AbstractBrick
 			$label = '';
 			$method = 'link';
 			$callback = null;
+			$aId = "";
 			if(is_array($setting)) {
 				$label = $setting['label'];
 				$callback = $setting['callback'];
